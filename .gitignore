@@ -1,0 +1,24 @@
+# Zig
+.zig-cache/
+zig-out/
+starter.dll
+starter.so
+cuda_example
+release/
+debug/
+
+# CUDA
+*.o
+*.obj
+*.ptx
+*.cubin
+*.fatbin
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Build artifacts
+build/
