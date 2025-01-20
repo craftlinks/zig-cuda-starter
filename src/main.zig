@@ -1,3 +1,5 @@
+const std = @import("std");
+
 extern fn cudaMalloc(ptr: *?*anyopaque, size: usize) c_int;
 extern fn cudaMemcpy(dest: *anyopaque, src: *const anyopaque, size: usize, kind: c_int) c_int;
 extern fn cudaFree(ptr: *anyopaque) c_int;
@@ -28,4 +30,17 @@ export fn add(a: i32, b: i32) i32 {
     _ = cudaFree(d_c.?);
 
     return result;
+}
+
+pub fn main() void {
+    const num1: i32 = 5;
+    const num2: i32 = 3;
+    const result = add(num1, num2);
+    std.debug.print("Result of {d} + {d} = {d}\n", .{ num1, num2, result });
+}
+
+test "basic addition" {
+    try std.testing.expectEqual(@as(i32, 4), add(2, 2));
+    try std.testing.expectEqual(@as(i32, 0), add(0, 0));
+    try std.testing.expectEqual(@as(i32, -2), add(-5, 3));
 }
